@@ -11,6 +11,40 @@ def my_func(a, b):
     return a + b
 ```
 
+```python
+import pandas as pd
+
+airports = pd.read_csv('data/airports.csv')
+airport_freq = pd.read_csv('data/airport-frequencies.csv')
+runways = pd.read_csv('data/runways.csv')
+```
+
+```python
+df.to_csv(...)  # csv file
+df.to_hdf(...)  # HDF5 file
+df.to_pickle(...)  # serialized object
+df.to_sql(...)  # to SQL database
+df.to_excel(...)  # to Excel sheet
+df.to_json(...)  # to JSON string
+df.to_html(...)  # render as HTML table
+df.to_feather(...)  # binary feather-format
+df.to_latex(...)  # tabular environment table
+df.to_stata(...)  # Stata binary data files
+df.to_msgpack(...)	# msgpack (serialize) object
+df.to_gbq(...)  # to a Google BigQuery table.
+df.to_string(...)  # console-friendly tabular output.
+df.to_clipboard(...) # clipboard that can be pasted into Excel
+```
+
+```python
+top_10.plot(
+    x='iso_country', 
+    y='airport_count',
+    kind='barh',
+    figsize=(10, 7),
+    title='Top 10 countries with most airports')
+```
+
 # SQL and Pandas cheatsheet.
 
 <table>
