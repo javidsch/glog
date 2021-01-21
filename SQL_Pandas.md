@@ -353,7 +353,8 @@ SELECT
 </td>
 <td>
   <pre lang="sql">
-select max(length_ft), min(length_ft), avg(length_ft), median(length_ft) 
+select max(length_ft), min(length_ft), 
+       avg(length_ft), median(length_ft) 
 from runways
    </pre>
 </td>
@@ -373,7 +374,8 @@ SELECT
 <td>
   <pre lang="sql">
 select airport_ident, type, description, frequency_mhz 
-from airport_freq join airports on airport_freq.airport_ref = airports.id 
+from airport_freq inner join 
+     airports on airport_freq.airport_ref = airports.id 
 where airports.ident = 'KLAX'
    </pre>
 </td>
