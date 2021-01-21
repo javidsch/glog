@@ -12,6 +12,13 @@ def my_func(a, b):
 ```
 
 # SQL and Pandas cheatsheet.
+<style>
+.markdown-preview {
+ table {
+   font-size: 4;
+  }
+}
+</style>
 
 <table>
   
