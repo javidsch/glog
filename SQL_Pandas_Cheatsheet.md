@@ -54,6 +54,48 @@ airports.head(3)
 </td>
 </tr>
 
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT total_bill, tip, smoker, time
+FROM tips
+LIMIT 5
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+tips[["total_bill", "tip", "smoker", "time"]].head(5)
+   </pre>
+</td>
+</tr>
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT *, tip/total_bill as tip_rate
+FROM tips
+LIMIT 5
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+tips.assign(tip_rate=tips["tip"] / tips["total_bill"]).head(5)
+   </pre>
+</td>
+</tr>
+
 <tr>
 <td>
   <pre lang="text">
@@ -138,6 +180,72 @@ airports[(airports.iso_region == 'US-CA')
    </pre>
 </td>
 </tr>
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT *
+FROM tips
+WHERE size >= 5 OR total_bill > 45
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+tips[  (tips["size"] >= 5) 
+     | (tips["total_bill"] > 45)
+    ]
+   </pre>
+</td>
+</tr>
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT *
+FROM frame
+WHERE col2 IS NULL
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+frame[frame["col2"].isna()]
+   </pre>
+</td>
+</tr>
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT *
+FROM frame
+WHERE col1 IS NOT NULL
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+frame[frame["col2"].isnotna()]
+   </pre>
+</td>
+</tr>
+
 
 <tr>
 <td>
@@ -299,6 +407,28 @@ airports[airports.iso_country == 'US']
 </td>
 </tr>
 
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+....
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+tips.groupby("sex").size()
+tips.groupby("sex").count()
+tips.groupby("sex")["total_bill"].count()
+   </pre>
+</td>
+</tr>
+
+
 <tr>
 <td>
   <pre lang="text">
@@ -331,12 +461,12 @@ SELECT
 select iso_country 
 from by_country 
 order by size desc 
-limit 10 offset 10
+limit 10 offset 5
    </pre>
 </td>
 <td>
   <pre lang="python">
-by_country.nlargest(20, columns='airport_count')
+by_country.nlargest(10+5, columns='airport_count')
           .tail(10)
    </pre>
 </td>
@@ -370,6 +500,48 @@ SELECT
 </td>
 <td>
   <pre lang="sql">
+SELECT day, AVG(tip), COUNT(*)
+FROM tips
+GROUP BY day
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+tips.groupby("day").agg({"tip": np.mean, "day": np.size})
+   </pre>
+</td>
+</tr>
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT smoker, day, COUNT(*), AVG(tip)
+FROM tips
+GROUP BY smoker, day
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+tips.groupby(["smoker", "day"]).agg({"tip": [np.size, np.mean]})
+   </pre>
+</td>
+</tr>
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
 select airport_ident, type, description, frequency_mhz 
 from airport_freq inner join 
      airports on airport_freq.airport_ref = airports.id 
@@ -384,6 +556,96 @@ airport_freq.merge(airports[airports.ident == 'KLAX'][['id']],
    </pre>
 </td>
 </tr>
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT *
+FROM df1
+INNER JOIN df2
+  ON df1.key = df2.key
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+pd.merge(df1, df2, on="key")
+   </pre>
+</td>
+</tr>
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT *
+FROM df1
+LEFT OUTER JOIN df2
+  ON df1.key = df2.key
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+pd.merge(df1, df2, on="key", how="left")
+   </pre>
+</td>
+</tr>
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT *
+FROM df1
+RIGHT OUTER JOIN df2
+  ON df1.key = df2.key
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+pd.merge(df1, df2, on="key", how="right")
+   </pre>
+</td>
+</tr>
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT *
+FROM df1
+FULL OUTER JOIN df2
+  ON df1.key = df2.key
+  ON df1.key = df2.key
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+pd.merge(df1, df2, on="key", how="outer")
+   </pre>
+</td>
+</tr>
+
+
 
 <tr>
 <td>
@@ -411,6 +673,98 @@ pd.concat([
    </pre>
 </td>
 </tr>
+
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT city, rank
+FROM df1
+UNION
+SELECT city, rank
+FROM df2
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+pd.concat([df1, df2]).drop_duplicates()
+   </pre>
+</td>
+</tr>
+
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT * FROM (
+  SELECT
+    t.*,
+    ROW_NUMBER() OVER(PARTITION BY day ORDER BY total_bill DESC) AS rn
+  FROM tips t
+)
+WHERE rn < 3
+ORDER BY day, rn
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+   ....:     tips.assign(
+   ....:         rn=tips.sort_values(["total_bill"], ascending=False)
+   ....:         .groupby(["day"])
+   ....:         .cumcount()
+   ....:         + 1
+   ....:     )
+   ....:     .query("rn < 3")
+   ....:     .sort_values(["day", "rn"])
+   </pre>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+SELECT * FROM (
+  SELECT
+    t.*,
+    RANK() OVER(PARTITION BY sex ORDER BY tip) AS rnk
+  FROM tips t
+  WHERE tip < 2
+)
+WHERE rnk < 3
+ORDER BY sex, rnk
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+   ....:     tips[tips["tip"] < 2]
+   ....:     .assign(rnk_min=tips.groupby(["sex"])["tip"].rank(method="min"))
+   ....:     .query("rnk_min < 3")
+   ....:     .sort_values(["sex", "rnk_min"])
+   </pre>
+</td>
+</tr>
+
+
 
 <tr>
 <td>
@@ -495,6 +849,26 @@ where type = 'MISC'
 lax_freq = lax_freq[lax_freq.type != 'MISC']
 #OR
 lax_freq.drop(lax_freq[lax_freq.type == 'MISC'].index)
+   </pre>
+</td>
+</tr>
+
+
+<tr>
+<td>
+  <pre lang="text">
+SELECT
+   </pre>
+</td>
+<td>
+  <pre lang="sql">
+DELETE FROM tips
+WHERE tip > 9
+   </pre>
+</td>
+<td>
+  <pre lang="python">
+tips = tips.loc[tips["tip"] <= 9]
    </pre>
 </td>
 </tr>
