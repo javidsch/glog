@@ -1,6 +1,3 @@
-# OK
-## OK
-
 ### SQL script
 ```sql
 select * from airport_freq 
@@ -14,7 +11,7 @@ def my_func(a, b):
     return a + b
 ```
 
-# SQL and Pandas merging...
+# SQL and Pandas cheatsheet.
 
 <table>
   
