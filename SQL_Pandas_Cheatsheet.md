@@ -12,13 +12,6 @@ def my_func(a, b):
 ```
 
 # SQL and Pandas cheatsheet.
-<style>
-.markdown-preview {
- table {
-   font-size: 4;
-  }
-}
-</style>
 
 <table>
   
@@ -28,7 +21,7 @@ def my_func(a, b):
 SELECT
    </pre>
 </td>
-<td>
+<td style="width: 10%">
   <pre lang="sql">
 select * 
 from airports
