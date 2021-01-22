@@ -1,2 +1,1 @@
-# glog
-## Github Blog (Data Analytics & Engineering)
+# Data Analytics & Engineering blog
