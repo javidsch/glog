@@ -1,1 +1,1 @@
-# Data Analytics & Engineering blog
+# Data & Analytics github blog (glog)
