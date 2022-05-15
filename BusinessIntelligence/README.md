@@ -4,17 +4,17 @@
 ### Cheatsheet:
 
 ### Visual Analytics
-![Image description](assets/fjefogjbjhz.jpeg)
+![Image description](CheatSheets/fjefogjbjhz.jpeg)
 
 ### Tableau Lifecycle
-![Image description](assets/ghqkgmhgwky.png)
+![Image description](CheatSheets/ghqkgmhgwky.png)
 
 ### Tableau 
-![Image description](assets/hraesctqrqx.jpeg)
+![Image description](CheatSheets/hraesctqrqx.jpeg)
 
 ### Tableau Chart Selection
-![Image description](assets/hraesctqscx.png)
+![Image description](CheatSheets/hraesctqscx.png)
 
 ### Principles of Visualation
-![Image description](assets/phfkqmnggsy.jpeg)
+![Image description](CheatSheets/phfkqmnggsy.jpeg)
 
